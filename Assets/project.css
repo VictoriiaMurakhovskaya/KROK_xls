@@ -1,0 +1,44 @@
+h1 {
+    color: dimgrey;
+    alignment: center;
+    vertical-align: bottom;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px;
+   }
+
+h4 {
+    color: black;
+    alignment: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 20px;
+   }
+
+h3 {
+    color: red;
+    alignment: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 20px;
+   }
+
+h6 {
+    color: darkblue;
+    alignment: left;
+    vertical-align: middle;
+    font-size: 12px;
+    font-family: Arial;
+    margin: 20px;
+   }
+
+a {
+    color: darkblue;
+    alignment: left;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px;
+    font-family: Arial;
+    margin: 20px;
+   }
+
