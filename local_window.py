@@ -9,10 +9,9 @@ import sys
 
 
 def generate_table():
-
     if (file_name := fd.askopenfilename(defaultextension='.xlsx',
-                                   filetypes=[('Excel таблиці', '*.xlsx'),
-                                              ('Excel таблиці (2007)', '*.xls')])) == '':
+                                        filetypes=[('Excel таблиці', '*.xlsx'),
+                                                   ('Excel таблиці (2007)', '*.xls')])) == '':
         mb.showwarning(title='Помилка', message='Некоректно обрано файл')
         return
 
@@ -21,11 +20,11 @@ def generate_table():
         return
 
     if make_file(file_name, savedir, int(clmn_values_str[0].get()),
-                             int(clmn_values_str[1].get()), int(clmn_values_str[2].get()),
-                             int(clmn_values_str[3].get()),
-                             int(clmn_values_str[4].get()), int(clmn_values_str[5].get()),
-                             list(font.families())[cmb_font.current()],
-                             int(f_size.get())):
+                 int(clmn_values_str[1].get()), int(clmn_values_str[2].get()),
+                 int(clmn_values_str[3].get()),
+                 0, 0,
+                 list(font.families())[cmb_font.current()],
+                 int(f_size.get())):
         mb.showinfo(title='Інформація', message='Файли сформовано')
     else:
         mb.showwarning(title='Помилка', message='Помилка обробки файла')
@@ -55,9 +54,9 @@ if __name__ == '__main__':
     lbl3.grid(column=0, row=1, padx=5, pady=5, columnspan=4)
     clmn_labels = []
     clmn_sizes = []
-    clmn_values = [10, 40, 10, 8, 8, 8]
+    clmn_values = [10, 40, 10, 8]
     clmn_values_str = []
-    for i in range(0, 6):
+    for i in range(0, 4):
         clmn_labels.append(Label(window, text=str(i + 1) + ': ', justify=LEFT))
         clmn_labels[i].grid(column=2 * i, row=2, padx=5, pady=5)
         clmn_values_str.append(StringVar(window))

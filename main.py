@@ -13,10 +13,10 @@ import traceback
 row_width = 10
 
 # строка заголовков
-headers_row = 1
+headers_row = 9
 
 # начало перечня студентов
-start_row = 5
+start_row = 14
 
 # ширина колонок
 columns_width = {'A': 10,
@@ -57,7 +57,7 @@ def insert_subheader(wb, ws, name, row_number, p1, p2, size):
         ws.write(row_number, k, '', sub_header_format)
     if p1 != 0:
         ws.write(row_number, 2, p1, sub_header_numbers)
-        #ws.write(row_number, 4, p2, sub_header_numbers)
+        # ws.write(row_number, 4, p2, sub_header_numbers)
 
 
 def is_number(value):
@@ -149,14 +149,17 @@ def make_file(file_name, save_dir, w1, w2, w3, w4, w5, w6, font, size):
         for i in range(0, len(head)):
             ws.write(0, i, head[i], header_format)
 
+        for i in range(0, len(head)):
+            ws.write(1, i, str(i + 1), header_format)
+
         # строки таблицы
         count = 0
-        count_rows = 0
+        count_rows = 1
         count_n = 1
         total_credits = 0
         total_hours = 0
         for subj in subjs:
-            if subjs_params[subj][2] == 'P':
+            if subjs_params[subj][0] == 'P':
                 count_rows += 1
                 count += 1
                 insert_subheader(wb, ws, subjs_params[subj][1], count_rows, 0, 0, size)
@@ -169,23 +172,24 @@ def make_file(file_name, save_dir, w1, w2, w3, w4, w5, w6, font, size):
                     if subjs_params[subj][4]:
                         total_hours += int(subjs_params[subj][4])
                     count_rows += 1
-                    ws.write(count_rows, 0, subjs_params[subj][0], row_numbers)
-                    for k, n in zip([0, 1, 3], range(0, 3)):
+                    ws.write(count_rows, 0, subjs_params[subj][0] if subjs_params[subj][0] != 'N' else '', row_numbers)
+                    for k, n in zip([1, 3], range(1, 3)):
                         ws.write(count_rows, n, ('-' if not subjs_params[subj][k] else subjs_params[subj][k]),
                                  row_strings if k == 1 else row_numbers)
                     ws.write(count_rows, 3, score, row_numbers)
                     count_n += 1
-        insert_subheader(wb, ws, 'Загальна кількість кредитів Європейської кредитної трансферно - накопичувальної системи'
-                                 ' / Total ECTS Credits',
+        insert_subheader(wb, ws,
+                         'Загальна кількість кредитів Європейської кредитної трансферно - накопичувальної системи'
+                         ' / Total ECTS Credits',
                          count_rows + 1, total_credits, total_hours, size)
         try:
             wb.close()
-        except :
+        except:
             print(
-            '>>> traceback <<<')
+                '>>> traceback <<<')
             traceback.print_exc()
             print(
-            '>>> end of traceback <<<')
+                '>>> end of traceback <<<')
     return True
 
 
